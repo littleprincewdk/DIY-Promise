@@ -1,7 +1,3 @@
-import { add } from './utils';
-
-add(1, 1);
-
-class Promise {}
+import Promise from './promise';
 
 export default Promise;

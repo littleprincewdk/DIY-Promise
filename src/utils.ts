@@ -1,7 +1,5 @@
-export function add(a: number, b: number): number {
-  return a + b;
-}
+export function noopFunc(): void {}
 
-export function say(word: string): void {
-  console.log(word);
+export function nextTick(callback): void {
+  setTimeout(callback, 0);
 }

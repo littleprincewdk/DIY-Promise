@@ -16,12 +16,7 @@ module.exports = {
     'no-console': 'off',
     'max-len': ['error', 80],
     'no-new': 'off',
-    'no-underscore-dangle': [
-      'error',
-      {
-        allowAfterThis: true,
-      },
-    ],
+    'no-underscore-dangle': 'off',
     'linebreak-style': 'off',
     'no-unused-expressions': 'off',
     'class-methods-use-this': 'off',
