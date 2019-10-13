@@ -11,6 +11,11 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
   ],
+  globals: {
+    document: 'readonly',
+    MutationObserver: 'readonly',
+    WebKitMutationObserver: 'readonly'
+  },
   rules: {
     'prettier/prettier': 'error',
     'no-console': 'off',
