@@ -1,5 +1,13 @@
 export function noopFunc(): void {}
 
+export function isObject(x: any): boolean {
+  return typeof x === 'object';
+}
+
+export function isFunction(x: any): boolean {
+  return typeof x === 'function';
+}
+
 interface Observer {
   new (callback: MutationCallback): MutationObserver;
   prototype: MutationObserver;
@@ -65,3 +73,22 @@ export const nextTick = (function nextTick(): Function {
     setTimeout(callback, 0);
   };
 })();
+
+export const PROMISE_ID = Math.random()
+  .toString(36)
+  .substring(2);
+
+let id = 0;
+
+export function nextId() {
+  id += 1;
+  return id;
+}
+
+export function isPromise(x: any) {
+  return isObject(x) && x[PROMISE_ID];
+}
+
+export function thenable(x: any) {
+  return isObject(x) && isFunction(x.then);
+}

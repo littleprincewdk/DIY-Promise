@@ -15,14 +15,14 @@ import Promise from '../dist';
 // // eslint-disable-next-line prefer-promise-reject-errors
 // Promise.reject('Promise.reject').catch(str => console.log(str));
 
-Promise.resolve(1)
-  .then(a => {
-    console.log(a);
-    return 2;
-  })
-  .then(a => {
-    console.log(a);
-  });
+// Promise.resolve(1)
+//   .then(a => {
+//     console.log(a);
+//     return 2;
+//   })
+//   .then(a => {
+//     console.log(a);
+//   });
 
 // Promise.all([
 //   Promise.resolve(1),
@@ -48,3 +48,21 @@ Promise.resolve(1)
 //   .catch(e => {
 //     console.log('e', e);
 //   });
+
+// promise
+Promise.resolve(
+  new Promise(resolve => {
+    resolve(42);
+  })
+).then(a => {
+  console.log(a);
+});
+
+// // thenable
+// Promise.resolve({
+//   then(resolve) {
+//     resolve(42);
+//   },
+// }).then(a => {
+//   console.log(a);
+// });

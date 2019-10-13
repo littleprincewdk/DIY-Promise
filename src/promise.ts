@@ -1,8 +1,8 @@
-import { noopFunc, nextTick } from './utils';
 import resolve from './static/resolve';
 import reject from './static/reject';
 import all from './static/all';
 import race from './static/race';
+import { noopFunc, isFunction, nextTick, PROMISE_ID, nextId } from './utils';
 
 export enum Status {
   Pending,
@@ -32,14 +32,15 @@ class Promise {
   _tick: boolean = false;
 
   constructor(callback: (resolve, reject?) => void) {
+    this[PROMISE_ID] = nextId();
     callback(this._resolve, this._reject);
   }
 
   then(onFulfilled, onRejected?) {
-    if (typeof onFulfilled === 'function') {
+    if (isFunction(onFulfilled)) {
       this._onFulfilled = onFulfilled;
     }
-    if (typeof onRejected === 'function') {
+    if (isFunction(onRejected)) {
       this._onRejected = onRejected;
     }
 
@@ -55,7 +56,7 @@ class Promise {
   }
 
   catch(onRejected: (error: any) => void) {
-    if (typeof onRejected === 'function') {
+    if (isFunction(onRejected)) {
       this._onRejected = onRejected;
     }
     if (this._status === Status.Rejected) {
