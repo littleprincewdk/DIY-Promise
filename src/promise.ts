@@ -68,13 +68,22 @@ class Promise {
     return this._next;
   }
 
-  _resolve = value => {
+  _resolve = (value: any): void => {
+    // SPEC: 2.1.2.1: When fulfilled, a promise:
+    // must not transition to any other state.
+    if (this._status !== Status.Pending) {
+      return;
+    }
+
     this._status = Status.Fulfilled;
     this._value = value;
     nextTick(() => {
       let nextValue;
       if (this._onFulfilled) {
-        nextValue = this._onFulfilled.call(null, value);
+        // SPEC: 2.2.5 `onFulfilled` and `onRejected`
+        // must be called as functions (i.e. with no `this` value).
+        const onFulfilled = this._onFulfilled;
+        nextValue = onFulfilled(value);
       }
       if (this._next) {
         this._next._resolve(nextValue);
@@ -84,12 +93,21 @@ class Promise {
     this._tick = true;
   };
 
-  _reject = error => {
+  _reject = (error: any): void => {
+    // SPEC: 2.1.3.1: When rejected, a promise:
+    // must not transition to any other state.
+    if (this._status !== Status.Pending) {
+      return;
+    }
+
     this._status = Status.Rejected;
     this._value = error;
     nextTick(() => {
       if (this._onRejected) {
-        this._onRejected.call(null, error);
+        // SPEC: 2.2.5 `onFulfilled` and `onRejected`
+        // must be called as functions (i.e. with no `this` value).
+        const onRejected = this._onRejected;
+        onRejected(null, error);
         if (this._next) {
           this._next._resolve(this._next._value);
         }
