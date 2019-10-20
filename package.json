@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "gulp",
-    "test": "node test/index.js"
+    "test": "node test/promises-aplus-tests"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
+    "promises-aplus-tests": "^2.1.2",
     "typescript": "^3.6.3"
   },
   "husky": {

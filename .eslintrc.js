@@ -24,11 +24,13 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'linebreak-style': 'off',
     'no-unused-expressions': 'off',
+    'func-names': 'off',
     'class-methods-use-this': 'off',
     'prefer-destructuring': ['error', { object: true, array: false }],
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/explicit-member-accessibility': [
       'error',
       {
